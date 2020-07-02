@@ -1,6 +1,6 @@
 <?php
 
-namespace Arifhas\Ui;
+namespace Arifhas\LaravelUi;
 
 class AuthRouteMethods
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Arifhas\Ui;
+namespace Arifhas\LaravelUi;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

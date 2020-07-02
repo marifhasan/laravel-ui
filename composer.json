@@ -21,13 +21,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Arifhas\\Ui\\": "src/",
+            "Arifhas\\LaravelUi\\": "src/",
             "Illuminate\\Foundation\\Auth\\": "auth-backend/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Arifhas\\Ui\\Tests\\": "tests/"
+            "Arifhas\\LaravelUi\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -39,7 +39,7 @@
         },
         "laravel": {
             "providers": [
-                "Arifhas\\Ui\\UiServiceProvider"
+                "Arifhas\\LaravelUi\\UiServiceProvider"
             ]
         }
     },

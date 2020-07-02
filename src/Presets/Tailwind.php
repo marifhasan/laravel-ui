@@ -1,6 +1,6 @@
 <?php
 
-namespace Arifhas\Ui\Presets;
+namespace Arifhas\LaravelUi\Presets;
 
 class Tailwind extends Preset
 {

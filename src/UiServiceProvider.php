@@ -1,6 +1,6 @@
 <?php
 
-namespace Arifhas\Ui;
+namespace Arifhas\LaravelUi;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
