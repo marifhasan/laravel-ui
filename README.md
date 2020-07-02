@@ -1,4 +1,4 @@
-# Arifhas Laravel UI
+# Laravel Laravel UI
 
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/laravel/ui/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/laravel/ui/v/stable.svg" alt="Latest Stable Version"></a>
@@ -28,4 +28,4 @@ Please review [our security policy](https://github.com/laravel/ui/security/polic
 
 ## License
 
-Arifhas UI is open-sourced software licensed under the [MIT license](LICENSE.md).
+Laravel UI is open-sourced software licensed under the [MIT license](LICENSE.md).
