@@ -1,4 +1,4 @@
-# Arifhas UI
+# Arifhas Laravel UI
 
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/laravel/ui/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/laravel/ui/v/stable.svg" alt="Latest Stable Version"></a>
