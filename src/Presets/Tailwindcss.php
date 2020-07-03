@@ -2,10 +2,32 @@
 
 namespace Arifhas\LaravelUi\Presets;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Laravel\Ui\Presets\Preset;
+use Symfony\Component\Finder\SplFileInfo;
 
 class Tailwindcss extends Preset
 {
+
+    /**
+     * The views that need to be exported.
+     *
+     * @var array
+     */
+    protected $views = [
+        'auth/login.stub' => 'auth/login.blade.php',
+        'auth/passwords/confirm.stub' => 'auth/passwords/confirm.blade.php',
+        'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
+        'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
+        'auth/register.stub' => 'auth/register.blade.php',
+        'auth/verify.stub' => 'auth/verify.blade.php',
+        'home.stub' => 'home.blade.php',
+        'layouts/app.stub' => 'layouts/app.blade.php',
+    ];
+
     /**
      * Install the preset.
      *
@@ -21,6 +43,12 @@ class Tailwindcss extends Preset
         static::removeNodeModules();
     }
 
+    public static function installAuth()
+    {
+        static::scaffoldController();
+        static::scaffoldAuth();
+    }
+
     /**
      * Update the given package array.
      *
@@ -29,9 +57,13 @@ class Tailwindcss extends Preset
      */
     protected static function updatePackageArray(array $packages)
     {
-        return [
-            'tailwindcss' => '^1.4.6',
-        ] + $packages;
+        return array_merge([
+            'tailwindcss' => '^1.4'
+        ], Arr::except($packages, [
+            'bootstrap',
+            'popper.js',
+            'jquery',
+        ]));
     }
 
     /**
@@ -41,7 +73,7 @@ class Tailwindcss extends Preset
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/tailwind-stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/tailwindcss-stubs/webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     /**
@@ -51,7 +83,7 @@ class Tailwindcss extends Preset
      */
     protected static function updateTailwindConfiguration()
     {
-        copy(__DIR__.'/tailwind-stubs/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/tailwindcss-stubs/tailwind.config.js', base_path('tailwind.config.js'));
     }
 
     /**
@@ -61,7 +93,7 @@ class Tailwindcss extends Preset
      */
     protected static function updateSass()
     {
-        copy(__DIR__.'/tailwind-stubs/app.scss', resource_path('sass/app.scss'));
+        copy(__DIR__.'/tailwindcss-stubs/app.scss', resource_path('sass/app.scss'));
     }
 
     /**
@@ -71,6 +103,76 @@ class Tailwindcss extends Preset
      */
     protected static function updateBootstrapping()
     {
-        copy(__DIR__.'/tailwind-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+        copy(__DIR__.'/tailwindcss-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
     }
+
+    
+    protected static function scaffoldController()
+    {
+        if (! is_dir($directory = app_path('Http/Controllers/Auth'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        $filesystem = new Filesystem;
+
+        collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/Auth')))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Auth/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
+    }
+
+    protected static function scaffoldAuth()
+    {
+        file_put_contents(app_path('Http/Controllers/HomeController.php'), static::compileControllerStub());
+
+        file_put_contents(
+            base_path('routes/web.php'),
+            file_get_contents(base_path('vendor/laravel/ui/src/Auth/stubs/routes.stub'),
+            FILE_APPEND
+        );
+
+        copy(
+            base_path('vendor/laravel/ui/stubs/migrations/2014_10_12_100000_create_password_resets_table.php'),
+            base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
+        );
+
+        foreach ($this->views as $key => $value) {
+            if (file_exists($view = $this->getViewPath($value)) && ! $this->option('force')) {
+                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
+                    continue;
+                }
+            }
+
+            copy(
+                __DIR__.'/../Auth/tailwindcss-stubs/'.$key,
+                $view
+            );
+        }
+    }
+
+    protected function compileControllerStub()
+    {
+        return str_replace(
+            '{{namespace}}',
+            Container::getInstance()->getNamespace(),
+            file_get_contents(base_path('vendor/laravel/ui/src/Auth/stubs/controllers/HomeController.stub')
+        );
+    }
+
+    /**
+     * Get full view path relative to the application's configured view path.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    protected function getViewPath($path)
+    {
+        return implode(DIRECTORY_SEPARATOR, [
+            config('view.paths')[0] ?? resource_path('views'), $path,
+        ]);
+    }
+
 }

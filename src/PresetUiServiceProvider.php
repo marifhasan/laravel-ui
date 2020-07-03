@@ -2,25 +2,28 @@
 
 namespace Arifhas\LaravelUi;
 
-use Laravel\Ui\UiServiceProvider;
-use Laravel\Ui\ControllersCommand;
+use Illuminate\Support\ServiceProvider;
+use Laravel\Ui\UiCommand;
+use Laravel\Ui\AuthCommand;
+use Arifhas\LaravelUi\Presets\Tailwindcss;
 
-class PresetUiServiceProvider extends UiServiceProvider
+class PresetUiServiceProvider extends ServiceProvider
 {
-    /**
-     * Register the package services.
-     *
-     * @return void
-     */
-    public function register()
+    public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                PresetAuthCommand::class,
-                ControllersCommand::class,
-                PresetUiCommand::class,
-            ]);
-        }
+        UiCommand::macro('tailwindcss', function ($command) {
+            Tailwindcss::install();
+
+            $command->info('Tailwind CSS scaffolding installed successfully.');
+
+            if ($command->option('auth')) {
+                Tailwindcss::installAuth();
+
+                $command->info('Tailwind CSS auth scaffolding installed successfully.');
+            }
+
+            $command->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+        });
     }
 
 }
