@@ -44,4 +44,25 @@ class PresetAuthCommand extends AuthCommand
         $this->info('Authentication scaffolding generated successfully.');
     }
 
+    /**
+     * Export the authentication views.
+     *
+     * @return void
+     */
+    protected function exportViews()
+    {
+        foreach ($this->views as $key => $value) {
+            if (file_exists($view = $this->getViewPath($value)) && ! $this->option('force')) {
+                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
+                    continue;
+                }
+            }
+
+            copy(
+                __DIR__.'/Auth/'.$this->argument('type').'-stubs/'.$key,
+                $view
+            );
+        }
+    }
+
 }
