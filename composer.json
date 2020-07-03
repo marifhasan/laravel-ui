@@ -15,8 +15,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Arifhas\\LaravelUi\\PresetUiServiceProvider",
-                "Laravel\\Ui\\UiServiceProvider"
+                "Arifhas\\LaravelUi\\PresetUiServiceProvider"
             ]
         }
     }
