@@ -30,7 +30,7 @@ class PresetAuthCommand extends AuthCommand
             return call_user_func(static::$macros[$this->argument('type')], $this);
         }
 
-        if (! in_array($this->argument('type'), ['bootstrap', 'tailwind'])) {
+        if (! in_array($this->argument('type'), ['bootstrap', 'tailwindcss'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 

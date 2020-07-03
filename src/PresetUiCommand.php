@@ -37,7 +37,7 @@ class PresetUiCommand extends UiCommand
             return call_user_func(static::$macros[$this->argument('type')], $this);
         }
 
-        if (! in_array($this->argument('type'), ['bootstrap', 'tailwind', 'vue', 'react'])) {
+        if (! in_array($this->argument('type'), ['bootstrap', 'tailwindcss', 'vue', 'react'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 
@@ -53,7 +53,7 @@ class PresetUiCommand extends UiCommand
      *
      * @return void
      */
-    protected function tailwind()
+    protected function tailwindcss()
     {
         Presets\Tailwindcss::install();
 
