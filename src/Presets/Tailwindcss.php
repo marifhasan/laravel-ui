@@ -13,22 +13,6 @@ class Tailwindcss extends Preset
 {
 
     /**
-     * The views that need to be exported.
-     *
-     * @var array
-     */
-    protected $views = [
-        'auth/login.stub' => 'auth/login.blade.php',
-        'auth/passwords/confirm.stub' => 'auth/passwords/confirm.blade.php',
-        'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
-        'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
-        'auth/register.stub' => 'auth/register.blade.php',
-        'auth/verify.stub' => 'auth/verify.blade.php',
-        'home.stub' => 'home.blade.php',
-        'layouts/app.stub' => 'layouts/app.blade.php',
-    ];
-
-    /**
      * Install the preset.
      *
      * @return void
@@ -130,7 +114,7 @@ class Tailwindcss extends Preset
 
         file_put_contents(
             base_path('routes/web.php'),
-            file_get_contents(base_path('vendor/laravel/ui/src/Auth/stubs/routes.stub'),
+            file_get_contents(base_path('vendor/laravel/ui/src/Auth/stubs/routes.stub')),
             FILE_APPEND
         );
 
@@ -139,13 +123,28 @@ class Tailwindcss extends Preset
             base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
         );
 
-        foreach ($this->views as $key => $value) {
-            if (file_exists($view = $this->getViewPath($value)) && ! $this->option('force')) {
-                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
-                    continue;
-                }
-            }
+        $views = [
+            'auth/login.stub' => 'auth/login.blade.php',
+            'auth/passwords/confirm.stub' => 'auth/passwords/confirm.blade.php',
+            'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
+            'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
+            'auth/register.stub' => 'auth/register.blade.php',
+            'auth/verify.stub' => 'auth/verify.blade.php',
+            'home.stub' => 'home.blade.php',
+            'layouts/app.stub' => 'layouts/app.blade.php',
+        ];
+    
+        if (! is_dir($directory = static::getViewPath('layouts'))) {
+            mkdir($directory, 0755, true);
+        }
 
+        if (! is_dir($directory = static::getViewPath('auth/passwords'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        foreach ($views as $key => $value) {
+            $view = static::getViewPath($value);
+            
             copy(
                 __DIR__.'/../Auth/tailwindcss-stubs/'.$key,
                 $view
@@ -153,12 +152,12 @@ class Tailwindcss extends Preset
         }
     }
 
-    protected function compileControllerStub()
+    protected static function compileControllerStub()
     {
         return str_replace(
             '{{namespace}}',
             Container::getInstance()->getNamespace(),
-            file_get_contents(base_path('vendor/laravel/ui/src/Auth/stubs/controllers/HomeController.stub')
+            file_get_contents(base_path('vendor/laravel/ui/src/Auth/stubs/controllers/HomeController.stub'))
         );
     }
 
@@ -168,7 +167,7 @@ class Tailwindcss extends Preset
      * @param  string  $path
      * @return string
      */
-    protected function getViewPath($path)
+    protected static function getViewPath($path)
     {
         return implode(DIRECTORY_SEPARATOR, [
             config('view.paths')[0] ?? resource_path('views'), $path,
