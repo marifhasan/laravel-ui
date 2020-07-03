@@ -1,43 +1,22 @@
 {
     "name": "arifhas/laravel-ui",
     "description": "Laravel UI utilities and presets.",
-    "keywords": ["laravel", "ui"],
+    "keywords": ["laravel", "ui", "tailwindcss"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Arif Hasan",
-            "email": "arif.saiket@gmail.com"
-        }
-    ],
     "require": {
-        "php": "^7.2.5",
-        "laravel/ui": "^2.1"
-    },
-    "require-dev": {
+        "laravel/framework": "^7.0",
+        "laravel/ui": "^2.0"
     },
     "autoload": {
         "psr-4": {
             "Arifhas\\LaravelUi\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Arifhas\\LaravelUi\\Tests\\": "tests/"
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.x-dev"
-        },
         "laravel": {
             "providers": [
-                "Laravel\\Ui\\UiServiceProvider"
+                "Arifhas\\LaravelUi\\PresetUiServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
