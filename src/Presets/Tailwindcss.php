@@ -132,6 +132,7 @@ class Tailwindcss extends Preset
             'auth/verify.stub' => 'auth/verify.blade.php',
             'home.stub' => 'home.blade.php',
             'layouts/app.stub' => 'layouts/app.blade.php',
+            'layouts/auth.stub' => 'layouts/auth.blade.php',
         ];
     
         if (! is_dir($directory = static::getViewPath('layouts'))) {
