@@ -11,6 +11,13 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 ```
 composer require arifhas/laravel-ui
 ```
+```
+php artisan ui tailwindcss
+```
+or
+```
+php artisan ui tailwindcss --auth
+```
 
 **We are not accepting new presets.**
 

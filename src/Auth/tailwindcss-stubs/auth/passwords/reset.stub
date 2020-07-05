@@ -11,7 +11,7 @@
     <input type="hidden" name="token" value="{{ $token }}">
     <div class="rounded-md shadow-sm">
         <div>
-            <input aria-label="Email address" name="email" type="email" id="email" value="{{ old('email') }}" required autocomplete="email" autofocus class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('email') border-red-500 @enderror" placeholder="arif@example.com" />
+            <input aria-label="Email address" name="email" type="email" id="email" value="{{ old('email') }}" required autocomplete="email" autofocus class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('email') border-red-500 @enderror" placeholder="email@example.com" />
         </div>
         <div class=""><!-- -mt-px -->
             <input aria-label="Password" id="password" name="password" type="password" required autocomplete="current-password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('password') border-red-500 @enderror" placeholder="Password" />
