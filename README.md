@@ -1,10 +1,8 @@
 # Laravel UI with Tailwind
 
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/arifhas/laravel-ui/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/arifhas/laravel-ui/version.svg" alt="Version"></a>
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/arifhas/laravel-ui/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/arifhas/laravel-ui/license.svg" alt="License"></a>
-[![Version](https://poser.pugx.org/arifhas/laravel-ui/version)](//packagist.org/packages/arifhas/laravel-ui)
 
 ## Introduction
 
