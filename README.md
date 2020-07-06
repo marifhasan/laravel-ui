@@ -29,4 +29,4 @@ php artisan ui react --auth
 
 ## License
 
-Laravel UI is open-sourced software licensed under the [MIT license](LICENSE.md).
+Laravel UI with Tailwind is open-sourced software licensed under the [MIT license](LICENSE.md).
