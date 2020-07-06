@@ -1,4 +1,4 @@
-# Laravel Laravel UI
+# Laravel UI with Tailwind
 
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/arifhas/laravel-ui/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/arifhas/ui"><img src="https://poser.pugx.org/arifhas/laravel-ui/v/stable.svg" alt="Latest Stable Version"></a>
@@ -6,36 +6,26 @@
 
 ## Introduction
 
-While Laravel does not dictate which JavaScript or CSS pre-processors you use, it does provide a basic starting point using [Bootstrap](https://getbootstrap.com/), [Tailwind](https://tailwindcss.com/), [React](https://reactjs.org/), and / or [Vue](https://vuejs.org/) that will be helpful for many applications. By default, Laravel uses [NPM](https://www.npmjs.org/) to install both of these frontend packages.
+This package is inspired by [Frontend preset for Tailwind CSS](https://github.com/laravel-frontend-presets/tailwindcss), integrated with [Laravel UI](https://github.com/laravel/ui). So you can run all command what laravel UI provides with tailwind scaffolding.
 
+## Install using Composer
 ```
 composer require arifhas/laravel-ui
 ```
+Once the arifhas/laravel-ui package has been installed, you may install the frontend scaffolding using the ui Artisan command like Laravel UI:
 ```
+// Generate basic scaffolding...
 php artisan ui tailwindcss
-```
-or
-```
+php artisan ui bootstrap
+php artisan ui vue
+php artisan ui react
+
+// Generate login / registration scaffolding...
 php artisan ui tailwindcss --auth
+php artisan ui bootstrap --auth
+php artisan ui vue --auth
+php artisan ui react --auth
 ```
-
-**We are not accepting new presets.**
-
-## Official Documentation
-
-Documentation can be found on the [Laravel website](https://laravel.com/docs/frontend).
-
-## Contributing
-
-Thank you for considering contributing to UI! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laravel/ui/security/policy) on how to report security vulnerabilities.
 
 ## License
 
